@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CodeXR - AI Assistant for AR/VR Developers</title>
+<link rel="stylesheet" href="/static/css/style.css" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+</head>
+<body>
+<div id="app">
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <i class="fas fa-vr-cardboard"></i>
+          <h1>CodeXR</h1>
+          <span class="tagline">AI Assistant for AR/VR Developers</span>
+        </div>
+        <div class="header-stats">
+          <div class="stat">
+            <span class="stat-number">3</span>
+            <span class="stat-label">Demo Scenarios</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">Unity</span>
+            <span class="stat-label">Unreal • Shaders</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main">
+    <div class="container">
+      <section class="query-section">
+        <div class="query-header">
+          <h2><i class="fas fa-search"></i> Ask CodeXR</h2>
+          <p>Get structured guidance for your AR/VR development challenges</p>
+        </div>
+
+        <div class="query-form">
+          <div class="input-group">
+            <div class="input-wrapper">
+              <textarea id="queryInput" placeholder="How do I add teleport locomotion in Unity VR?" rows="3"></textarea>
+              <button id="voiceBtn" class="voice-btn" title="Voice Input"><i class="fas fa-microphone"></i></button>
+            </div>
+            <div class="category-selector">
+              <select id="categorySelect">
+                <option value="">Auto-detect</option>
+                <option value="Unity">Unity</option>
+                <option value="Unreal">Unreal Engine</option>
+                <option value="Shader">Shader/Graphics</option>
+                <option value="General">General</option>
+              </select>
+            </div>
+            <button id="submitBtn" class="submit-btn"><i class="fas fa-paper-plane"></i> Ask CodeXR</button>
+          </div>
+        </div>
+
+        <div class="quick-examples">
+          <h3>Try these examples:</h3>
+          <div class="examples-grid">
+            <button class="example-btn" data-query="How do I add teleport locomotion in Unity VR?" data-category="Unity"><i class="fab fa-unity"></i> Unity VR Teleportation</button>
+            <button class="example-btn" data-query="How do I set up multiplayer in Unreal VR?" data-category="Unreal"><i class="fas fa-cube"></i> Unreal VR Multiplayer</button>
+            <button class="example-btn" data-query="Which shader works best for AR occlusion?" data-category="Shader"><i class="fas fa-eye"></i> AR Occlusion Shader</button>
+          </div>
+        </div>
+      </section>
+
+      <div id="loadingIndicator" class="loading hidden">
+        <div class="spinner"></div>
+        <p>CodeXR is analyzing your query...</p>
+      </div>
+
+      <section id="resultsSection" class="results-section hidden">
+        <div class="results-header">
+          <h2 id="resultQuery"></h2>
+          <div class="result-meta">
+            <span id="resultCategory" class="category-badge"></span>
+            <span id="resultDifficulty" class="difficulty-badge"></span>
+            <span id="resultTime" class="time-badge"></span>
+          </div>
+        </div>
+
+        <div class="results-content">
+          <div class="result-card">
+            <h3><i class="fas fa-list-ol"></i> Step-by-Step Guide</h3>
+            <div id="subtasksList" class="subtasks-list"></div>
+          </div>
+
+          <div class="result-card">
+            <h3><i class="fas fa-code"></i> Code Implementation</h3>
+            <div class="code-container">
+              <div class="code-header">
+                <button id="copyCodeBtn" class="copy-btn" title="Copy to clipboard"><i class="fas fa-copy"></i></button>
+              </div>
+              <pre><code id="codeSnippet" class="language-csharp"></code></pre>
+            </div>
+          </div>
+
+          <div class="result-grid">
+            <div class="result-card">
+              <h3><i class="fas fa-thumbs-up"></i> Best Practices</h3>
+              <ul id="bestPracticesList" class="practices-list"></ul>
+            </div>
+
+            <div class="result-card">
+              <h3><i class="fas fa-exclamation-triangle"></i> Gotchas</h3>
+              <ul id="gotchasList" class="gotchas-list"></ul>
+            </div>
+          </div>
+
+          <div class="result-card">
+            <h3><i class="fas fa-external-link-alt"></i> Official Documentation</h3>
+            <div id="docLinks" class="doc-links"></div>
+          </div>
+
+          <div class="result-card collapsible">
+            <h3 class="collapsible-header">
+              <i class="fas fa-brackets-curly"></i> Raw JSON Output <i class="fas fa-chevron-down"></i>
+            </h3>
+            <div class="collapsible-content">
+              <div class="json-container">
+                <button id="copyJsonBtn" class="copy-btn" title="Copy JSON"><i class="fas fa-copy"></i></button>
+                <pre><code id="jsonOutput" class="language-json"></code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>CodeXR</h4>
+          <p>AI-powered coding assistant specifically designed for AR/VR developers using Unity, Unreal Engine, and shader programming.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Features</h4>
+          <ul>
+            <li>Step-by-step task breakdown</li>
+            <li>Ready-to-use code snippets</li>
+            <li>Best practices & common pitfalls</li>
+            <li>Documentation links</li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Supported Platforms</h4>
+          <div class="platform-icons">
+            <i class="fab fa-unity" title="Unity"></i>
+            <i class="fas fa-cube" title="Unreal Engine"></i>
+            <i class="fas fa-code" title="Shaders"></i>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 CodeXR. Built for AR/VR developers, by developers.</p>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+<script src="/static/js/app.js"></script>
+</body>
+</html>
