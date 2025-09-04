@@ -1,0 +1,44 @@
+# CodeXR - Complete Requirements
+# All deliverables as specified in the document
+
+# Core Streamlit and Web Framework
+streamlit==1.28.0
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+
+# LLM Integrations (as specified in document)
+google-generativeai==0.3.2  # Gemini 2.5
+openai==1.3.0               # GPT-4o-mini
+transformers==4.35.0        # StarCoder2/DeepSeek-Coder
+
+# Web Search Agent (LangChain + APIs as specified)
+langchain==0.0.350
+langchain-community==0.0.10
+serpapi==0.1.5              # SERP API via LangChain
+bing-search==1.0.0          # Bing API via LangChain
+
+# Speech-to-Text (Whisper as specified)
+openai-whisper==20231117
+SpeechRecognition==3.10.0
+pyaudio==0.2.11
+streamlit-audio-recorder==0.0.8
+
+# JSON Schema Validation (Pydantic as specified)
+pydantic==2.5.0
+
+# Phase 2: RAG-Lite Dependencies
+scikit-learn==1.3.2         # For TF-IDF vectorization
+numpy==1.24.3
+
+# Phase 3: VS Code Extension Dependencies
+typing-extensions==4.8.0
+
+# Additional Utilities
+requests==2.31.0
+python-dotenv==1.0.0
+httpx==0.25.2
+
+# Development and Testing
+pytest==7.4.3
+black==23.10.1
+flake8==6.1.0
